@@ -18,11 +18,11 @@ export class RegisterPage {
         this.createAccountTitle=page.getByRole('heading',{name:'Create your account'});
         this.emailInput=page.locator('[data-testid="register-email"]');
         this.passInput=page.locator('[data-testid="register-password"]');
-        this.confirmPassInput=page.locator('input[type="password"]');
+        this.confirmPassInput=page.getByRole('textbox', { name: 'Repeat your password' })
         this.submitBtn=page.locator('[data-testid="register-btn"]');
     }
     async goto(){
-        this.page.goto('https://eventhub.rahulshettyacademy.com/');
+        await this.page.goto('https://eventhub.rahulshettyacademy.com/');
     }
     async NavigateToRegisterUser(){
         await this.registerBtn.click();
