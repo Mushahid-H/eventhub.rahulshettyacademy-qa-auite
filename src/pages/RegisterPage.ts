@@ -1,4 +1,7 @@
 import {expect,Page} from '@playwright/test';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 export class RegisterPage {
     page:Page;
@@ -22,7 +25,7 @@ export class RegisterPage {
         this.submitBtn=page.locator('[data-testid="register-btn"]');
     }
     async goto(){
-        await this.page.goto('https://eventhub.rahulshettyacademy.com/');
+        await this.page.goto(process.env.WEBSITE_URL!);
     }
     async NavigateToRegisterUser(){
         await this.registerBtn.click();
