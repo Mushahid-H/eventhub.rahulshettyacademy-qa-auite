@@ -24,4 +24,13 @@ test.describe('Events API',()=>{
         expect(data.error).toBe('Unauthorized');
         
     });
+    test('should fetch single event by id',async ({request})=>{
+        const eventsAPI=new EventsAPI(request);
+        const response = await eventsAPI.getSingleEventById('1');
+        expect(response.status()).toBe(200);
+        const data =await response.json();
+        expect(data.success).toBe(true);
+        expect(data.data).toHaveProperty('id');
+        expect(data.data).toHaveProperty('title');
+    });
 })

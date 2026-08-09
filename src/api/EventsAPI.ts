@@ -36,4 +36,12 @@ export class EventsAPI {
             }
         });     
     }
+    async getSingleEventById(eventId:string): Promise<APIResponse> {
+        return await this.request.get(`${process.env.BACKEND_URL}api/events/${eventId}`, {
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': `Bearer ${process.env.API_TOKEN}`
+            }
+        });
+    }
 }
