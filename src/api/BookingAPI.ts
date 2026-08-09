@@ -22,4 +22,12 @@ export class BookingAPI{
             }
         })
     }
+    async createBookingWithMissingData(eventId:string,customerName:string,customerEmail:string,customerPhone:string, quantity:number):Promise<APIResponse>{
+        return await this.request.post(process.env.BACKEND_URL+'api/bookings',{
+            headers:{
+                'Accept':'application/json',
+                'Authorization':`Bearer ${process.env.API_TOKEN}`
+            },
+        })
+    }
 }       
