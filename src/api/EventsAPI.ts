@@ -7,7 +7,7 @@ export class EventsAPI {
     constructor(request: APIRequestContext) {
         this.request = request;
     }
-    async getEvents(category:string, city:string,search:string, page:number,limit:number): Promise<APIResponse> {
+    async getEventsWithToken(category:string, city:string,search:string, page:number,limit:number): Promise<APIResponse> {
         return await this.request.get(`${process.env.BACKEND_URL}api/events`, {
             headers: {
                 'Accept': 'application/json',
@@ -21,5 +21,19 @@ export class EventsAPI {
                 'limit':limit
             }
         });
+    }
+    async getEventWithoutToken(category:string, city:string,search:string, page:number,limit:number): Promise<APIResponse> {
+        return await this.request.get(`${process.env.BACKEND_URL}api/events`, {
+            headers: {
+                'Accept': 'application/json'
+            },
+            params:{
+                'category':category,
+                'city':city,
+                'search':search,
+                'page':page,
+                'limit':limit
+            }
+        });     
     }
 }

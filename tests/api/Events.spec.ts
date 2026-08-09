@@ -4,7 +4,7 @@ import { EventsAPI } from '../../src/api/EventsAPI'
 test.describe('Events API',()=>{
     test('should fetch all events',async ({request})=>{
         const eventsAPI=new EventsAPI(request);
-        const response = await eventsAPI.getEvents('Festival','Delhi','Diwali',1,10);
+        const response = await eventsAPI.getEventsWithToken('Festival','Delhi','Diwali',1,10);
         expect(response.status()).toBe(200);
         const data =await response.json();
         // console.log(data);
@@ -15,4 +15,13 @@ test.describe('Events API',()=>{
         expect(data.data[0]).toHaveProperty('title');
         expect(data.data[0]['title']).toContain('Diwali');
     })
+    test('should fetch events without token',async ({request})=>{
+        const eventsAPI=new EventsAPI(request);
+        const response = await eventsAPI.getEventWithoutToken('Festival','Delhi','Diwali',1,10);
+        expect(response.status()).toBe(401);
+        const data =await response.json();
+        expect(data.success).toBe(false);
+        expect(data.error).toBe('Unauthorized');
+        
+    });
 })
