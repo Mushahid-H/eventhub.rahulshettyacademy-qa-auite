@@ -8,15 +8,18 @@ test.describe('Register Page', () => {
         const registerPage = new RegisterPage(page);
         const reusableFtns = new ReusableFtns(page);
         await reusableFtns.goto();
-        await registerPage.ensureLoginPage();
+        await reusableFtns.ensureLoginPage();
         await registerPage.NavigateToRegisterUser();
         await registerPage.ensureCreateAccountPage();
 
     });
     test('should navigate to register page and fill the form', async ({ page }) => {
         const registerPage = new RegisterPage(page);
-        await registerPage.fillRegisterForm('test@example12.com', 'Password123@', 'Password123@');
+        const reusableFtns = new ReusableFtns(page);
+
+        await registerPage.fillRegisterForm('test@example12545.com', 'Password123@', 'Password123@');
         await registerPage.clickSubmitBtn();
+        await reusableFtns.ensureHomePage();
     });
     test('should navigate to register page and fill the form with existing email', async ({ page }) => {
         const registerPage = new RegisterPage(page);

@@ -5,8 +5,6 @@ dotenv.config();
 
 export class RegisterPage {
     page:Page;
-    homePageTitle;
-    registerTitle;
     registerBtn;
     createAccountTitle;
     emailInput;
@@ -18,8 +16,6 @@ export class RegisterPage {
     fillPasswordError;
     constructor(page:Page){
         this.page=page;
-        this.homePageTitle=page.getByRole('heading',{name:'Discover & Book Amazing Events'});
-        this.registerTitle=page.getByText('Sign in to EventHub');
         this.registerBtn=page.locator('a[href="/register"]');
         this.createAccountTitle=page.getByRole('heading',{name:'Create your account'});
         this.emailInput=page.locator('[data-testid="register-email"]');
@@ -33,16 +29,12 @@ export class RegisterPage {
     async NavigateToRegisterUser(){
         await this.registerBtn.click();
     }
-    async ensureLoginPage(){
-        await expect(this.registerTitle).toBeVisible();
-    }
+   
     async ensureCreateAccountPage(){
         await expect(this.createAccountTitle).toBeVisible();
     }
  
-    async ensureHomePage(){
-        await expect(this.homePageTitle).toBeVisible();
-    }
+    
     async fillRegisterForm(email:string,password:string,confirmPassword:string){
         await this.emailInput.fill(email);
         await this.passInput.fill(password);

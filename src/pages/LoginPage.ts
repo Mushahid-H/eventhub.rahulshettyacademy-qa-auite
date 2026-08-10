@@ -1,5 +1,4 @@
 import {expect, Page} from "@playwright/test";
-import {ReusableFtns} from "../utility/reusableFtns";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -11,7 +10,7 @@ export class LoginPage {
     passInput;
     submitBtn;
     errorMessage;
-    // reusableFtns= new ReusableFtns(this.page);
+    
 
     constructor(page: Page) {
         this.page = page;
@@ -21,6 +20,16 @@ export class LoginPage {
         this.passInput=page.locator('#password');
         this.submitBtn=page.locator('#login-btn');
         this.errorMessage=page.getByText('Invalid email or password');
+    }
+    async fillLoginForm(email: string, password: string) {
+        await this.emailInput.fill(email);
+        await this.passInput.fill(password);
+    }
+    async clickSubmitBtn() {
+        await this.submitBtn.click();
+    }
+    async ensureErrorMessageVisible() {
+        await expect(this.errorMessage).toBeVisible();
     }
     
     
