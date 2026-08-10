@@ -14,6 +14,8 @@ export class RegisterPage {
     confirmPassInput;
     submitBtn;
     errorMessage;
+    fillEmailError;
+    fillPasswordError;
     constructor(page:Page){
         this.page=page;
         this.homePageTitle=page.getByRole('heading',{name:'Discover & Book Amazing Events'});
@@ -25,6 +27,8 @@ export class RegisterPage {
         this.confirmPassInput=page.getByRole('textbox', { name: 'Repeat your password' })
         this.submitBtn=page.locator('[data-testid="register-btn"]');
         this.errorMessage=page.getByText('Email already registered');
+        this.fillEmailError=page.getByText('Enter a valid email');
+        this.fillPasswordError=page.getByText('Password does not meet the requirements below');
     }
     async goto(){
         await this.page.goto(process.env.WEBSITE_URL!);
@@ -52,5 +56,11 @@ export class RegisterPage {
     }
     async ensureErrorMessageVisible(){
         await expect(this.errorMessage).toBeVisible();
+    }
+    async ensureFillEmailErrorVisible(){
+        await expect(this.fillEmailError).toBeVisible();
+    }
+    async ensureFillPasswordErrorVisible(){
+        await expect(this.fillPasswordError).toBeVisible();
     }
 }
