@@ -33,4 +33,15 @@ test.describe('Register Page', () => {
         await registerPage.ensureFillEmailErrorVisible();
         await registerPage.ensureFillPasswordErrorVisible();
     });
+    test('should navigate to register page and fill the form with invalid email format', async ({ page }) => {
+        const registerPage = new RegisterPage(page);
+        await registerPage.goto();
+        await registerPage.ensureLoginPage();
+        await registerPage.NavigateToRegisterUser();
+        await registerPage.ensureCreateAccountPage();
+        await registerPage.fillRegisterForm('testexample.com', 'Password123@', 'Password123@');
+        await registerPage.clickSubmitBtn();
+        await registerPage.ensureFillEmailErrorVisible();
+    });
+    
 });
