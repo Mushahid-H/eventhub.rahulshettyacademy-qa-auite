@@ -30,9 +30,6 @@ export class RegisterPage {
         this.fillEmailError=page.getByText('Enter a valid email');
         this.fillPasswordError=page.getByText('Password does not meet the requirements below');
     }
-    async goto(){
-        await this.page.goto(process.env.WEBSITE_URL!);
-    }
     async NavigateToRegisterUser(){
         await this.registerBtn.click();
     }
