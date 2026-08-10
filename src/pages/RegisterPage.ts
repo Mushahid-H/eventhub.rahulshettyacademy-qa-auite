@@ -13,6 +13,7 @@ export class RegisterPage {
     passInput;
     confirmPassInput;
     submitBtn;
+    errorMessage;
     constructor(page:Page){
         this.page=page;
         this.homePageTitle=page.getByRole('heading',{name:'Discover & Book Amazing Events'});
@@ -23,6 +24,7 @@ export class RegisterPage {
         this.passInput=page.locator('[data-testid="register-password"]');
         this.confirmPassInput=page.getByRole('textbox', { name: 'Repeat your password' })
         this.submitBtn=page.locator('[data-testid="register-btn"]');
+        this.errorMessage=page.getByText('Email already registered');
     }
     async goto(){
         await this.page.goto(process.env.WEBSITE_URL!);
@@ -47,5 +49,8 @@ export class RegisterPage {
     }
     async clickSubmitBtn(){
         await this.submitBtn.click();
+    }
+    async ensureErrorMessageVisible(){
+        await expect(this.errorMessage).toBeVisible();
     }
 }

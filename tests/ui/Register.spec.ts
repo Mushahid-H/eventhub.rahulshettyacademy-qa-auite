@@ -9,7 +9,17 @@ test.describe('Register Page', () => {
         await registerPage.ensureLoginPage();
         await registerPage.NavigateToRegisterUser();
         await registerPage.ensureCreateAccountPage();
-        await registerPage.fillRegisterForm('test@example.com', 'Password123@', 'Password123@');
+        await registerPage.fillRegisterForm('test@example12.com', 'Password123@', 'Password123@');
         await registerPage.clickSubmitBtn();
+    });
+    test('should navigate to register page and fill the form with existing email', async ({ page }) => {
+        const registerPage = new RegisterPage(page);
+        await registerPage.goto();
+        await registerPage.ensureLoginPage();
+        await registerPage.NavigateToRegisterUser();
+        await registerPage.ensureCreateAccountPage();
+        await registerPage.fillRegisterForm('test@example12.com', 'Password123@', 'Password123@');
+        await registerPage.clickSubmitBtn();
+        
     });
 });
