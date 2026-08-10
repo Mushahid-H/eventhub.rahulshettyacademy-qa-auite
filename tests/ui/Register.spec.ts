@@ -43,5 +43,16 @@ test.describe('Register Page', () => {
         await registerPage.clickSubmitBtn();
         await registerPage.ensureFillEmailErrorVisible();
     });
-    
+    test('should navigate to register page and fill the name field with SQL injection', async ({ page }) => {
+        const registerPage = new RegisterPage(page);
+        await registerPage.goto();
+        await registerPage.ensureLoginPage();
+        await registerPage.NavigateToRegisterUser();
+        await registerPage.ensureCreateAccountPage();
+        await registerPage.fillRegisterForm('<script>alert(1)</script>', 'Password123@', 'Password123@');
+        await registerPage.clickSubmitBtn();
+        await registerPage.ensureFillEmailErrorVisible();
+        
+    });
+
 });
