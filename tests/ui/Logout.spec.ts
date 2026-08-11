@@ -21,5 +21,10 @@ test.describe('Logout Page', () => {
         await logoutPage.clickLogoutBtn();
         await reusableFtns.ensureLoginPage();
     });
+    test('Should invalidate session if user logsout, access protected pages stay inaccessable',async ({page})=>{
+        const reusableFtns = new ReusableFtns(page);
+        await page.goto(process.env.WEBSITE_URL!+'admin/events');
+        await reusableFtns.ensureLoginPage();
+    });
 
 });
