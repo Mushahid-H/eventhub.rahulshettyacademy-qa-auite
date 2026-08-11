@@ -31,6 +31,16 @@ test.describe('Login Page', () => {
         await loginPage.clickSubmitBtn();
         await loginPage.ensureErrorMessageVisible();
     });
+    test('should persist session if user refreshes app after login', async ({page})=>{
+        const loginPage = new LoginPage(page);
+        await loginPage.fillLoginForm(process.env.LOGIN_EMAIL!, process.env.LOGIN_PASSWORD!);
+        await loginPage.clickSubmitBtn();
+        await page.waitForLoadState('networkidle');
+        await page.reload();
+        const reusableFtns = new ReusableFtns(page);
+        await reusableFtns.ensureHomePage();
+        
+    });
 
 
 
