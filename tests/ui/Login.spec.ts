@@ -20,12 +20,18 @@ test.describe('Login Page', () => {
     });
     test('should throws error if login with invalid pass', async ({page})=>{
         const loginPage = new LoginPage(page);
-        const reusableFtns = new ReusableFtns(page);
         await loginPage.fillLoginForm(process.env.LOGIN_EMAIL!, 'sdfghjklhgfd');
         await loginPage.clickSubmitBtn();
         await loginPage.ensureErrorMessageVisible();
 
     });
+    test('should throws error if login with unregistered email', async ({page})=>{
+        const loginPage = new LoginPage(page);
+        await loginPage.fillLoginForm('unregistered@email.com', process.env.LOGIN_PASSWORD!);
+        await loginPage.clickSubmitBtn();
+        await loginPage.ensureErrorMessageVisible();
+    });
+
 
 
 });
