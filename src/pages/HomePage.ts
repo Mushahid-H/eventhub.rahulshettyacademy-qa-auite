@@ -12,6 +12,7 @@ export class HomePage{
     eventCardInsearch;
     eventCardInSearchTitle;
     noResultsMessage;
+    selectCategory;
     constructor(page: Page) {
         this.page = page;
         this.eventCard=page.getByTestId('event-card').first();
@@ -24,8 +25,7 @@ export class HomePage{
         this.eventCardInsearch=page.getByTestId('event-card').first();
         this.eventCardInSearchTitle=this.eventCardInsearch.locator('h3');
         this.noResultsMessage=page.getByText('No events found');
-
-
+        this.selectCategory=page.locator('select');
         
     }
     async ensureEventCardsVisible() {
@@ -46,15 +46,17 @@ export class HomePage{
         await expect(this.eventsHeading).toBeVisible();
     }
     async searchEvent(eventName:string){
-        await this.searchInput.fill('Hollywood');
+        await this.searchInput.fill(eventName);
         await this.searchInput.press('Enter');
         await expect(this.eventCardInSearchTitle).toContainText(eventName);
 
     }
     async EnsureEmtpyStates(){
-
         await expect(this.noResultsMessage).toBeVisible();
-
+    }
+    async chooseCategory(){
+        await this.selectCategory.selectOption('Festival');
+        await this.eventCard.waitFor({ state: 'visible' }); 
     }
 
 }

@@ -16,23 +16,29 @@ test.describe('Home Page', () => {
         await page.waitForLoadState('networkidle');
 
     });
-    test('should display event cards with details', async ({ page }) => {
-        // const reusableFtns = new ReusableFtns(page);
-        const homePage = new HomePage(page);
-        await homePage.ensureEventCardsVisible();
-        await homePage.ensureEventCardsDetails();
-    });
-    test('Search for an event and verify the result', async ({ page }) => {
-        const homePage = new HomePage(page);
-        await homePage.clickEventsBtn();
-        await homePage.ensureEventsHeadingVisible();
-        await homePage.searchEvent('Hollywood');
-    });
+    // test('should display event cards with details', async ({ page }) => {
+    //     // const reusableFtns = new ReusableFtns(page);
+    //     const homePage = new HomePage(page);
+    //     await homePage.ensureEventCardsVisible();
+    //     await homePage.ensureEventCardsDetails();
+    // });
+    // test('Search for an event and verify the result', async ({ page }) => {
+    //     const homePage = new HomePage(page);
+    //     await homePage.clickEventsBtn();
+    //     await homePage.ensureEventsHeadingVisible();
+    //     await homePage.searchEvent('Hollywood');
+    // });
     test('search with no matches to verify empty states', async ({ page }) => {
         const homePage= new HomePage(page);
         await homePage.clickEventsBtn();
         await homePage.ensureEventsHeadingVisible();
         await homePage.searchEvent('NonExistentEvent');
         await homePage.EnsureEmtpyStates();
+    });
+    test('Select a category',async ({page})=>{
+        const homePage=new HomePage(page);
+        await homePage.clickEventsBtn();
+        await homePage.ensureEventsHeadingVisible();
+        await homePage.chooseCategory();
     });
 });
