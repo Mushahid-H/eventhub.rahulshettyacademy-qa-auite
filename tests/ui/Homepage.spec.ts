@@ -28,4 +28,11 @@ test.describe('Home Page', () => {
         await homePage.ensureEventsHeadingVisible();
         await homePage.searchEvent('Hollywood');
     });
+    test('search with no matches to verify empty states', async ({ page }) => {
+        const homePage= new HomePage(page);
+        await homePage.clickEventsBtn();
+        await homePage.ensureEventsHeadingVisible();
+        await homePage.searchEvent('NonExistentEvent');
+        await homePage.EnsureEmtpyStates();
+    });
 });

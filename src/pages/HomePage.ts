@@ -11,6 +11,7 @@ export class HomePage{
     searchInput;
     eventCardInsearch;
     eventCardInSearchTitle;
+    noResultsMessage;
     constructor(page: Page) {
         this.page = page;
         this.eventCard=page.getByTestId('event-card').first();
@@ -22,6 +23,7 @@ export class HomePage{
         this.searchInput=page.getByPlaceholder('Search events, venues…')
         this.eventCardInsearch=page.getByTestId('event-card').first();
         this.eventCardInSearchTitle=this.eventCardInsearch.locator('h3');
+        this.noResultsMessage=page.getByText('No events found');
 
 
         
@@ -47,6 +49,11 @@ export class HomePage{
         await this.searchInput.fill('Hollywood');
         await this.searchInput.press('Enter');
         await expect(this.eventCardInSearchTitle).toContainText(eventName);
+
+    }
+    async EnsureEmtpyStates(){
+
+        await expect(this.noResultsMessage).toBeVisible();
 
     }
 
