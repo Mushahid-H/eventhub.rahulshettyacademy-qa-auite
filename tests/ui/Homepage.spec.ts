@@ -22,4 +22,10 @@ test.describe('Home Page', () => {
         await homePage.ensureEventCardsVisible();
         await homePage.ensureEventCardsDetails();
     });
+    test('Search for an event and verify the result', async ({ page }) => {
+        const homePage = new HomePage(page);
+        await homePage.clickEventsBtn();
+        await homePage.ensureEventsHeadingVisible();
+        await homePage.searchEvent('Hollywood');
+    });
 });
