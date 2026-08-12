@@ -48,6 +48,9 @@ export class HomePage{
     async searchEvent(eventName:string){
         await this.searchInput.fill(eventName);
         await this.searchInput.press('Enter');
+
+    }
+    async ensureEventCardInSearchVisible(eventName:string){
         await expect(this.eventCardInSearchTitle).toContainText(eventName);
 
     }
@@ -55,7 +58,7 @@ export class HomePage{
         await expect(this.noResultsMessage).toBeVisible();
     }
     async chooseCategory(){
-        await this.selectCategory.selectOption('Festival');
+        await this.selectCategory.getByRole('combobox').first()
         await this.eventCard.waitFor({ state: 'visible' }); 
     }
 
